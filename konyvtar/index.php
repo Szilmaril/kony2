@@ -10,23 +10,60 @@
 	<head>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<style>
+			body
+			{
+				background-image: url("image/bg.jpg");
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+
+			.jumbotrontext
+			{
+				background-color: rgba(255,255,255,.3);
+			}
+
+			.input
+			{
+				-webkit-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+				-moz-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+				box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+			}
+		</style>
 	</head>
 	<body>
-		<form class="container text-center" action="" method="POST">
-			<a href="login.php" class="btn btn-primary">Bejelentkezés</a>
-			<label>Felhasználónév: </label>
-			<input type="text" name="username" id="username" value="<?php echo (isset($users)) ? $users["username"] : "" ; ?>"><br>
-			<label>Jelszó: </label>
-			<input type="password" name="password" id="password" value="<?php echo (isset($users)) ? $users["password"] :"";?>"><br>
-			<label>Jelszó ellenörzés: </label>
-			<input type="password" name="password_confirmation" id="passwordConfirmation" value="<?php echo (isset($users)) ? $users["password"] :"";?>"><br>
-			<label>Email: </label>
-			<input type="email" name="email" id="email" value="<?php echo (isset($users)) ? $users["email"] :"";?>"><br>
-			<label>Születésnap: </label>
-			<input type="date" name="birthday" id="birthday" value="<?php echo (isset($users)) ? $users["birthday"] :""; ?>"><br>
-	
-			<button type="submit" name="submitForm">Mentés</button>
-		</form>
+		<div class="container">
+			<div class="jumbotron jumbotrontext text-center"><h2>Welcome!</h2></div>
+			<form class="container form-group" action="" method="POST" style="color: white;">
+				<div class="form-row">
+					<label for="username">Felhasználónév: </label>
+					<input type="text" id="username" name="username" class="input form-control" id="username" value="<?php echo (isset($users)) ? $users["username"] : "" ; ?>">
+				</div>
+				<div class="form-row">
+					<label>Jelszó: </label>
+					<input type="password" class="input form-control" name="password" id="password" value="<?php echo (isset($users)) ? $users["password"] :"";?>">
+				</div>
+				<div class="form-row">
+					<label>Jelszó ellenörzés: </label>
+					<input type="password" class="input form-control" name="password_confirmation" id="passwordConfirmation" value="<?php echo (isset($users)) ? $users["password"] :"";?>">
+				</div>
+				<div class="form-row">
+					<label>Email: </label>
+					<input type="email" class="input form-control" name="email" id="email" value="<?php echo (isset($users)) ? $users["email"] :"";?>"><br>
+				</div>
+
+				<div class="form-row">
+					<label>Születésnap: </label>
+					<input type="date" class="input form-control" name="birthday" id="birthday" value="<?php echo (isset($users)) ? $users["birthday"] :""; ?>">
+				</div>
+				<hr>
+				<div class="form-row">
+					<button class="btn btn-success" type="submit" name="submitForm">Mentés</button>
+					<a class="btn btn-info" href="login.php" class="btn btn-primary">Bejelentkezés</a>
+				</div>
+			</form>
+		</div>
+		
 	</body>
 </html>
 <?php 
