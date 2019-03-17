@@ -53,8 +53,8 @@ if(isset($_POST["login"])){
 										<form method='POST'>
 											<div class='form-row'>
 												<div class='col'>
-													<input type='text' name='username' id="username" class='registry' placeholder='username' required="true">
-													<input class='registry' type='password' id="password" name='password' placeholder='jelszo' required="true">
+													<input type='text' name='username' id="username" class='input' placeholder='username' required="true">
+													<input class='input' type='password' id="password" name='password' placeholder='jelszo' required="true">
 												</div>		
 											</div>
 											<div class='form-row'>
