@@ -8,7 +8,7 @@ require_once "db.php";
 
 $writername = $_GET["szerzoid"];
 $writername = (int)$writername;
-$selectString = "SELECT * FROM writer WHERE szerzoid =".$szerzoid;
+$selectString = "SELECT * FROM writer WHERE id =".$writername;
 
 $db = db::get();
 $writers = $db->getArray($selectString);
