@@ -9,6 +9,10 @@
 		$quantity = $db->escape($_POST["quantity"]);
 		$language = $db->escape($_POST["language"]);
 
+		if (empty($story) || empty($book_title) || empty($lid) || empty($quantity) || empty($language)) {
+			echo "<script>window.location.href='listBook.php?error=empty';</script>";
+		}
+
 		$updateQuery = "UPDATE `book` SET `story` = '$story', `book_title` = '$book_title', `lid` = '$lid ', `quantity` = '$quantity', `language` = '$language' WHERE `book`.`id` = ".$id;
 		$update = $db->query($updateQuery);
 		echo "<script>window.location.href='listBook.php?success=done';</script>";

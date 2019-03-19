@@ -13,6 +13,8 @@
 <html>
 <head>
 	<?php require_once("../head.php"); ?>
+	<link rel="stylesheet" href="../css/sweetalert.min.css">
+	<script src="../js/sweetalert.all.min.js"></script>
 	<style>
 		.bg
 		{
@@ -28,8 +30,61 @@
 		}
 
 	</style>
+  <script>
+    function errormsg(errortext)
+    {
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: errortext + "!",
+        footer: "If you need help, contact us <a href='../index.php' style='color:black;text-decoration:none;'> <i class='fas fa-arrow-right'></i></a>."
+      })
+    }
+
+    function okmsg(oktext)
+    {
+      Swal.fire(
+        'Ok!',
+        oktext + '!',
+        'success'
+        )
+    }
+
+  </script>
+
 </head>
 <body class="bg">
+	<?php 
+  switch ($error) {
+   case 'empty':
+   echo "<script>errortext = 'All gap must be filled'; errormsg(errortext);</script>";
+   break;
+
+   case 'unknown':
+   echo "<script>errortext = 'Something went wrong..'; errormsg(errortext);</script>";
+   break;
+
+   case 'largeImg':
+   echo "<script>errortext = 'Uploaded picture is too big'; errormsg(errortext);</script>";
+   break;
+
+   case 'wrongFileFormat':
+   echo "<script>errortext = 'Invalid file format uploaded. Only JPG, GIF, PNG format allowed.'; errormsg(errortext);</script>";
+   break;
+
+   case 'noUpload':
+   echo "<script>errortext = 'Sorry, there was an error during uploading'; errormsg(errortext);</script>";
+   break;
+
+   default:
+     # code...
+   break;
+ }
+
+ if ($success == "done") {
+   echo "<script>oktext = 'Succesful modifications'; okmsg(oktext);</script>";
+ }
+ ?>
 		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="#">Adatszerkesztés</a>
