@@ -60,23 +60,25 @@ $writers = $db->getArray($selectString);
 			</div>
 		</nav>
 
-				<div class="container">
 			<?php foreach($writers as $writer):?>
-		<div class="card" style="width:800px">
-			<div class="card-header text-center">
-				<h4>
-					<?php echo $writer["writer_name"]; ?>
-				</h4>
+			<div class="container text-center">
+				<div class="card" style="width:800px">
+					<div class="card-header text-center">
+						<h4>
+							<?php echo $writer["writer_name"]; ?>
+						</h4>
+					</div>
+					<div class="card-body text-center">
+						<img src="../image/<?php echo $writer["writer_picture"];?>" width="600" height="600">
+					</div>
+					<div class="card-footer">
+						<h6>Születésnap: <?php echo $writer["writer_birthday"]; ?></h6><hr>
+						<h6>Történet: </h6><p><?php echo $writer["life_story"]; ?></p><hr>
+						<a href="writerEdit.php?writerid=<?php echo $writer["id"];?>">Szerkesztés</a><hr>
+						<a href="writerDelete.php?writerid=<?php echo $writer["id"];?>">Törlés</a><hr>
+					</div>
+				</div>
 			</div>
-			<div class="card-body text-center">
-			<img src="../image/<?php echo $writer["writer_picture"];?>" width="600" height="600">
-		</div>
-		<div class="card-footer">
-			<h6>Születésnap: <?php echo $writer["writer_birthday"]; ?></h6><hr>
-			<h6>Története:</h6><p><?php echo $writer["life_story"]; ?></p>
-			<a href="list.php">Vissza<a>
-		</div>
-	<?php endforeach; ?>
-		</div>
+			<?php endforeach; ?>
 	</body>
 </html>

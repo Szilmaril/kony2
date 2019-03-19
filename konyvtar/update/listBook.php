@@ -5,7 +5,9 @@
 	if ($_SESSION["username"] != "admin") {
 		header("location: ../index.php");
 	}
-
+	$selectString = "SELECT * FROM book";
+	$db = db::get();
+	$books = $db->getArray($selectString);
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,3 +59,29 @@
 				</ul>
 			</div>
 		</nav>
+		
+			<?php foreach($books as $book):?>
+			<div class="container text-center">
+				<div class="card" style="width:800px">
+					<div class="card-header text-center">
+						<h4>
+							<?php echo $book["book_title"]; ?>
+						</h4>
+					</div>
+					<div class="card-body text-center">
+						<img src="../image/<?php echo $book["cover_image"];?>" width="600" height="600">
+					</div>
+					<div class="card-footer">
+						<h6>Fedél típus: <?php echo $book["lid"]; ?></h6><hr>
+						<h6>Nyelv: <?php echo $book["language"]; ?></h6><hr>
+						<h6>Megjelenés: <?php echo $book["publishing"]; ?></h6><hr>
+						<h6>Mennyiség: <?php echo $book["quantity"]; ?></h6><hr>
+						<h6>Történet: </h6><p><?php echo $book["story"]; ?></p><hr>
+						<a href="bookEdit.php?bookid=<?php echo $book["id"];?>">Szerkesztés</a><hr>
+						<a href="bookDelete.php?bookid=<?php echo $book["id"];?>">Törlés</a><hr>
+					</div>
+				</div>
+			</div>
+			<?php endforeach; ?>
+	</body>
+</html>
