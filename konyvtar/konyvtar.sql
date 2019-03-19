@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2019. Már 17. 21:49
--- Kiszolgáló verziója: 10.1.37-MariaDB
--- PHP verzió: 7.3.1
+-- Létrehozás ideje: 2019. Már 19. 12:13
+-- Kiszolgáló verziója: 10.1.31-MariaDB
+-- PHP verzió: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,7 +45,7 @@ CREATE TABLE `book` (
 
 INSERT INTO `book` (`id`, `publishing`, `story`, `book_title`, `cover_image`, `lid`, `quantity`, `language`) VALUES
 (1, '2019-02-22', 'Jó könyv.', 'A gyűrűk ura', 'gyu.jpg', 'Keményfedeles', 200, 'magyar'),
-(2, '2014-07-18', 'Jó könyv.', 'A gyűrűk ura', 'gyu2.jpg', 'Keményfedeles', 200, 'magyar');
+(2, '2014-07-18', 'Jó könyv2.', 'A gyűrűk ura2', 'pizza.jpg', 'Keményfedeles2 ', 201, 'magyar2');
 
 -- --------------------------------------------------------
 
@@ -272,9 +272,9 @@ ALTER TABLE `writer`
 -- Megkötések a táblához `book_edition`
 --
 ALTER TABLE `book_edition`
-  ADD CONSTRAINT `book_edition_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`),
   ADD CONSTRAINT `book_edition_ibfk_2` FOREIGN KEY (`writer_id`) REFERENCES `writer` (`id`),
-  ADD CONSTRAINT `book_edition_ibfk_3` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`);
+  ADD CONSTRAINT `book_edition_ibfk_3` FOREIGN KEY (`book_id`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `book_edition_ibfk_4` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 --
 -- Megkötések a táblához `kolcson`
