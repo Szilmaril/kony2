@@ -82,7 +82,7 @@
 					<td><?php echo $book_edition["book_title"]; ?></td>
 					<td><?php echo $book_edition["writer_name"]; ?></td>
 					<td><?php echo $book_edition["publishing"]; ?></td>
-					<td><a href="updateBooks.php?booksid=<?php echo $book_edition["id"];?>">Szerkesztés</a></td>
+					<td><a href="updateBooks.php?bookid=<?php echo $book_edition["id"];?>">Szerkesztés</a></td>
 					<td><a href="deleteBooks.php?booksid=<?php echo $book_edition["id"];?>">Törlés</a></td>
 				</tr>
 			<?php endforeach;?>
