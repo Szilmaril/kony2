@@ -101,12 +101,12 @@ $allBook = $db->getArray($selectBookQuery);
 								</select>
 								<select name="writer" id="writer">
 									<?php foreach($allWriter as $writer): ?>
-										<option value="<?php echo $writer['id']; ?>" title="<?php echo $writer['writer_birthday']; ?>">Cim: <?php echo $writer["writer_name"]; ?></option>
+										<option value="<?php echo $writer['id']; ?>" title="<?php echo $writer['writer_birthday']; ?>">Iro: <?php echo $writer["writer_name"]; ?></option>
 									<?php endforeach; ?>
 								</select>
 								<select name="category" id="category">
 									<?php foreach($allCategory as $category): ?>
-										<option value="<?php echo $category['id']; ?>">Cim: <?php echo $category["genre"]; ?></option>
+										<option value="<?php echo $category['id']; ?>">Kategoria: <?php echo $category["genre"]; ?></option>
 									<?php endforeach; ?>
 								</select>
 								<button class="btn btn-primary" name="done">Done!</button>
