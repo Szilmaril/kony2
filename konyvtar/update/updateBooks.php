@@ -42,10 +42,10 @@
 					<li class="nav-item">
 						<a class="nav-link" href="../list.php">Főoldal</a>
 					</li>
-					<li class="nav-item active">
+					<li class="nav-item">
 						<a class="nav-link" href="listBooks.php">Könyv szerkesztés</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item  active">
 						<a class="nav-link" href="listBook.php">Könyv kiadás szerkesztés</a>
 					</li>
 					<li class="nav-item">
@@ -69,10 +69,7 @@
 				<div class="container">
 					<img src="../image/<?php echo $data['cover_image']; ?>" class="text-center" alt="Borito kepe" style="border-radius: 50%; height: 25vh; width: 25vw;">
 				<form class="form-group" action="updateBookData.php?bookid=<?php echo $data['id']; ?>" method="post" enctype="multipart/form-data">
-					<div class="form-row">
-						<label for="story">Sztori</label>
-						<input type="text" name="story" id="story" value="<?php echo $data['story']; ?>">
-					</div>
+					
 					<div class="form-row">
 						<label for="book_title">Cim</label>
 						<input type="text" name="book_title" id="book_title" value="<?php echo $data['book_title']; ?>">
@@ -82,12 +79,20 @@
 						<input type="text" name="lid" id="lid" value="<?php echo $data['lid']; ?>">
 					</div>
 					<div class="form-row">
+						<label for="language">Nyelv</label>
+						<input type="text" name="language" id="language" value="<?php echo $data['language']; ?>">
+					</div>
+					<div class="form-row">
+						<label for="publishing">Publikálás</label>
+						<input type="date" name="publishing" id="publishing" value="<?php echo $data['publishing']; ?>">
+					</div>
+					<div class="form-row">
 						<label for="quantity">Mennyiseg</label>
 						<input type="number" min="0" name="quantity" id="quantity" value="<?php echo $data['quantity']; ?>">
 					</div>
 					<div class="form-row">
-						<label for="language">Nyelv</label>
-						<input type="text" name="language" id="language" value="<?php echo $data['language']; ?>">
+						<label for="story">Sztori</label>
+						<input type="text" name="story" id="story" value="<?php echo $data['story']; ?>">
 					</div>
 					<button name="updateBook" class="btn btn-success">Adatok szerkeztese</button>
 				</form>
