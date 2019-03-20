@@ -1,13 +1,14 @@
 <?php
+	error_reporting(E_ALL & ~E_NOTICE);
 	session_start();
 	require_once "../db.php";
 	
 	if ($_SESSION["username"] != "admin") {
 		header("location: ../index.php");
 	}
-	$selectString = "SELECT * FROM writer";
 	$db = db::get();
-$writers = $db->getArray($selectString);
+	$selectString = "SELECT * FROM writer";
+	$writers = $db->getArray($selectString);
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,8 +29,62 @@ $writers = $db->getArray($selectString);
 		}
 
 	</style>
+  <script>
+    function errormsg(errortext)
+    {
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: errortext + "!",
+        footer: "If you need help, contact us <a href='../index.php' style='color:black;text-decoration:none;'> <i class='fas fa-arrow-right'></i></a>."
+      })
+    }
+
+    function okmsg(oktext)
+    {
+      Swal.fire(
+        'Ok!',
+        oktext + '!',
+        'success'
+        )
+    }
+
+  </script>
+
 </head>
 <body class="bg">
+	<?php 
+  switch ($error) {
+   case 'empty':
+   echo "<script>errortext = 'All gap must be filled'; errormsg(errortext);</script>";
+   break;
+
+   case 'unknown':
+   echo "<script>errortext = 'Something went wrong..'; errormsg(errortext);</script>";
+   break;
+
+   case 'largeImg':
+   echo "<script>errortext = 'Uploaded picture is too big'; errormsg(errortext);</script>";
+   break;
+
+   case 'wrongFileFormat':
+   echo "<script>errortext = 'Invalid file format uploaded. Only JPG, GIF, PNG format allowed.'; errormsg(errortext);</script>";
+   break;
+
+   case 'noUpload':
+   echo "<script>errortext = 'Sorry, there was an error during uploading'; errormsg(errortext);</script>";
+   break;
+
+   default:
+     # code...
+   break;
+ }
+
+ if ($success == "done") {
+   echo "<script>oktext = 'Succesful modifications'; okmsg(oktext);</script>";
+ }
+ ?>
+
 		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="#">Adatszerkesztés</a>
@@ -59,7 +114,9 @@ $writers = $db->getArray($selectString);
 				</ul>
 			</div>
 		</nav>
-
+		<?php if(count($writers) == 0):?>
+			Jelenleg nincs egy író sem!
+		<?php else:?>
 			<?php foreach($writers as $writer):?>
 			<div class="container text-center">
 				<div class="card" style="width:800px">
@@ -74,11 +131,11 @@ $writers = $db->getArray($selectString);
 					<div class="card-footer">
 						<h6>Születésnap: <?php echo $writer["writer_birthday"]; ?></h6><hr>
 						<h6>Történet: </h6><p><?php echo $writer["life_story"]; ?></p><hr>
-						<a href="writerEdit.php?writerid=<?php echo $writer["id"];?>">Szerkesztés</a><hr>
-						<a href="writerDelete.php?writerid=<?php echo $writer["id"];?>">Törlés</a><hr>
+						<a href="updateWriters.php?writerid=<?php echo $writer["id"];?>">Szerkesztés</a><hr>
 					</div>
 				</div>
 			</div>
 			<?php endforeach; ?>
+		<?php endif; ?>
 	</body>
 </html>
