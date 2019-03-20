@@ -5,9 +5,8 @@ require_once ("db.php");
 if (!isset($_SESSION["username"])) {
 	header("location: index.php");
 }
-
-$selectString = "SELECT * FROM book_edition LEFT JOIN category ON category_id = category.id LEFT JOIN writer ON writer_id = writer.id LEFT JOIN book ON book_id = book.id";
 $db = db::get();
+$selectString = "SELECT * FROM book_edition LEFT JOIN category ON category_id = category.id LEFT JOIN writer ON writer_id = writer.id LEFT JOIN book ON book_id = book.id";
 $book_editions = $db->getArray($selectString);
 ?>
 <!DOCTYPE html>
@@ -34,11 +33,17 @@ $book_editions = $db->getArray($selectString);
 
 		
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			
+			<a class="navbar-brand" href="#">Könyvtár</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item active">
 						<a class="nav-link" href="list.php">Főoldal</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="update/listMyUser.php">Beállítások</a>
 					</li>
 					<?php if($_SESSION["username"] == "admin"): ?>
 					<li class="nav-item">
@@ -57,7 +62,9 @@ $book_editions = $db->getArray($selectString);
 				</ul>
 			</div>
 		</nav>
-
+<?php if(count($book_editions) == 0):?>
+	Jelenleg nincs egy könyv sem!
+<?php else:?>
 	<?php foreach($book_editions as $book_edition):?>
 		<div class="container text-center">
 			<div class="card" style="background-color: rgba(255,255,255,.5);">
@@ -78,7 +85,7 @@ $book_editions = $db->getArray($selectString);
 				</div>
 			</div>
 		</div>
-
 	<?php endforeach;?>
+<?php endif; ?>
 </body>
 </html>
