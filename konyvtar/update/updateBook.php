@@ -6,10 +6,10 @@ $db = db::get();
 $id = $db->escape($_GET["bookid"]);
 
 $selectUser = "SELECT cover_image FROM `book` WHERE id =".$id;
-$wtf = $db->getArray($selectUser);
+$books = $db->getArray($selectUser);
 
-foreach ($wtf as $kek) {
-  $cover = $kek["cover_image"];
+foreach ($books as $book) {
+  $cover = $book["cover_image"];
 }
 
 if (isset($_POST["uploadPicture"])) {
