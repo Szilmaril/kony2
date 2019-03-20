@@ -134,7 +134,7 @@
 						<h6>Mennyiség: <?php echo $book["quantity"]; ?></h6><hr>
 						<h6>Történet: </h6><p><?php echo $book["story"]; ?></p><hr>
 						<a href="updateBooks.php?bookid=<?php echo $book["id"];?>">Szerkesztés</a><hr>
-						<a href="bookDelete.php?bookid=<?php echo $book["id"];?>">Törlés</a><hr>
+						<a href="deleteBookEdition.php?bookid=<?php echo $book["id"];?>">Törlés</a><hr>
 					</div>
 				</div>
 			</div>
