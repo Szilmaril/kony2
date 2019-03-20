@@ -6,6 +6,8 @@
 		header("location: ../index.php");
 	}
 	$db = db::get();
+	$selectString = "SELECT * FROM book_edition LEFT JOIN category ON category_id = category.id LEFT JOIN writer ON writer_id = writer.id LEFT JOIN book ON book_id = book.id";
+	$book_editions = $db->getArray($selectString);
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,12 +59,9 @@
 				</ul>
 			</div>
 		</nav>
-<?php 
-	$selectString = "SELECT * FROM book_edition LEFT JOIN category ON category_id = category.id LEFT JOIN writer ON writer_id = writer.id LEFT JOIN book ON book_id = book.id";
-	$book_editions = $db->getArray($selectString);
-?>
+		
 	<?php if(count($book_editions) == 0):?>
-		Jelenleg nincs egy kategória sem!
+		Jelenleg nincs egy könyv sem!
 	<?php else:?>
 			<table class="table table-bordered">
 				<thead>
@@ -82,11 +81,11 @@
 					<td><?php echo $book_edition["book_title"]; ?></td>
 					<td><?php echo $book_edition["writer_name"]; ?></td>
 					<td><?php echo $book_edition["publishing"]; ?></td>
-					<td><a href="updateBooks.php?bookid=<?php echo $book_edition["id"];?>">Szerkesztés</a></td>
-					<td><a href="deleteBooks.php?booksid=<?php echo $book_edition["id"];?>">Törlés</a></td>
+					<td><a href="updateBookEdition.php?bookid=<?php echo $book_edition["id"];?>">Szerkesztés</a></td>
+					<td><a href="deleteBookEdition.php?booksid=<?php echo $book_edition["id"];?>">Törlés</a></td>
 				</tr>
 			<?php endforeach;?>
-		<?php endif;?>
-		
+		<?php endif;?>		
 	</body>
+</html>
 </html>
