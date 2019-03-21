@@ -7,6 +7,18 @@ if (!isset($_SESSION["username"])) {
 }
 $db = db::get();
 $selectString = "SELECT * FROM book_edition LEFT JOIN category ON category_id = category.id LEFT JOIN writer ON writer_id = writer.id LEFT JOIN book ON book_id = book.id";
+if(isset($_GET["keyword"])){
+			$keyword = $db->escape($_GET["keyword"]);
+			$selectString .= " 
+			WHERE 
+			`book_title` LIKE  '%".$keyword."%' 
+				OR 
+			`writer_name` LIKE '%".$keyword."%' 
+				OR 
+			`language` LIKE '%".$keyword."%' 
+				OR 
+			`genre` LIKE '%".$keyword."%'";
+		}
 $book_editions = $db->getArray($selectString);
 ?>
 <!DOCTYPE html>
@@ -62,7 +74,20 @@ $book_editions = $db->getArray($selectString);
 				</ul>
 			</div>
 		</nav>
-<?php if(count($book_editions) == 0):?>
+		<form action="" method="GET">
+			<label for="keyword">Keresés</label>
+			<input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ""; ?>">
+			<button type="submit">Indítás</button>
+			<?php if(isset($keyword)):?>
+				<a href="list.php">
+					<button type="button">
+						X
+					</button>
+				</a>
+			<?php endif; ?>
+<?php if(isset($keyword) && count($book_editions) == 0):?>
+	Nincs találat!
+<?php elseif(count($book_editions) == 0):?>
 	Jelenleg nincs egy könyv sem!
 <?php else:?>
 	<?php foreach($book_editions as $book_edition):?>
