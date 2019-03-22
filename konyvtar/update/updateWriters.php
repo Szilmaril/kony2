@@ -92,7 +92,7 @@
 					<form class="container form-group text-center" method="post" action="updateWriter.php?writerid=<?php echo $writer['id']; ?>" enctype="multipart/form-data">
 						<div class="form-group">
 							<label for="exampleFormControlFile1">Képcsere:</label>
-							<input type="file" class="form-control-file" name="fileToUpload2" id="exampleFormControlFile1">
+							<input type="file" class="form-control-file" name="fileToUpload2" id="exampleFormControlFile1" style="margin-left: 40%;"><br>
 							
 							<button class="btn btn-success" name="uploadPicture">Kép frissítés</button>
 						</div>

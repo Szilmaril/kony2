@@ -104,7 +104,7 @@ $book_editions = $db->getArray($selectString);
 							</h4>
 						</div>
 						<div class="card-body text-center">
-							<img src="image/<?php echo $book_edition["cover_image"];?>" style="width: 50vw; height: 50vh; border-radius: 10px;">
+							<img src="image/<?php echo $book_edition["cover_image"];?>" style="width: 45vw; height: 120vh; border-radius: 10px;">
 						</div>
 						<div class="card-footer">
 							<h6>Műfaj: <?php echo $book_edition["genre"]; ?></h6><hr>
