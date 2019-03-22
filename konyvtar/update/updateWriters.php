@@ -26,6 +26,12 @@
 			height: 100%;
 			width: 100%;
 		}
+		.input
+		{
+			-webkit-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+			-moz-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+			box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+		}
 
 	</style>
 </head>
@@ -66,30 +72,31 @@
 		<?php endif; ?>
 		<?php if(count($allwriter) > 0): ?>
 			<?php foreach($allwriter as $writer): ?>
-				<div class="container">
+				<div class="container text-center">
 					<img src="../image/<?php echo $writer['writer_picture']; ?>" class="text-center" alt="Borito kepe" style="border-radius: 50%; height: 25vh; width: 25vw;">
-				<form class="form-group" action="updateWriterData.php?writerid=<?php echo $writer['id']; ?>" method="post" enctype="multipart/form-data">
-					<div class="form-row">
-						<label for="writer_name">Név:</label>
-						<input type="text" name="writer_name" id="writer_name" value="<?php echo $writer['writer_name']; ?>">
-					</div>
-					<div class="form-row">
-						<label for="writer_birthday">Születésnap:</label>
-						<input type="date" name="writer_birthday" id="writer_birthday" value="<?php echo $writer['writer_birthday']; ?>">
-					</div>
-					<div class="form-row">
-						<label for="life_story">Történet:</label>
-						<input type="text" name="life_story" id="life_story" value="<?php echo $writer['life_story']; ?>">
-					</div>
-					<button name="updateWriter" class="btn btn-success">Adatok szerkeztese</button>
-				</form>
-				<form method="post" action="updateWriter.php?writerid=<?php echo $writer['id']; ?>" enctype="multipart/form-data">
-							<div class="form-group">
-								<label for="exampleFormControlFile1">Uj kep feltoltese</label>
-								<input type="file" class="form-control-file" name="fileToUpload2" id="exampleFormControlFile1">
-								<button class="btn btn-success" name="uploadPicture">Kep frissitese</button>
-							</div>
-						</form>
+					<form class="container form-group" action="updateWriterData.php?writerid=<?php echo $writer['id']; ?>" method="post" enctype="multipart/form-data">
+						<div class="form-row">
+							<label for="writer_name">Név:</label>
+							<input type="text" class="input form-control" name="writer_name" id="writer_name" value="<?php echo $writer['writer_name']; ?>">
+						</div>
+						<div class="form-row">
+							<label for="writer_birthday">Születésnap:</label>
+							<input type="date" class="input form-control" name="writer_birthday" id="writer_birthday" value="<?php echo $writer['writer_birthday']; ?>">
+						</div>
+						<div class="form-row">
+							<label for="life_story">Történet:</label>
+							<input type="text" class="input form-control" name="life_story" id="life_story" value="<?php echo $writer['life_story']; ?>">
+						</div>
+						<button name="updateWriter" class="btn btn-success">Adatok szerkeztese</button>
+					</form>
+					<form class="container form-group text-center" method="post" action="updateWriter.php?writerid=<?php echo $writer['id']; ?>" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="exampleFormControlFile1">Képcsere:</label>
+							<input type="file" class="form-control-file" name="fileToUpload2" id="exampleFormControlFile1">
+							
+							<button class="btn btn-success" name="uploadPicture">Kép frissítés</button>
+						</div>
+					</form>
 				</div>
 				
 			<?php endforeach; ?>
