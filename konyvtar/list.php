@@ -41,9 +41,7 @@ $book_editions = $db->getArray($selectString);
 
 	</style>
 </head>
-<body class="bg">
-
-		
+	<body class="bg">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<a class="navbar-brand" href="#">Könyvtár</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,10 +72,10 @@ $book_editions = $db->getArray($selectString);
 				</ul>
 			</div>
 		</nav>
-		<form action="" method="GET">
+		<form class="container form-group text-center" action="" method="GET">
 			<label for="keyword">Keresés</label>
-			<input type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ""; ?>">
-			<button type="submit">Indítás</button>
+			<input class="input form-control" type="text" name="keyword" id="keyword" value="<?php echo isset($keyword) ? $keyword : ""; ?>">
+			<button class="btn btn-success" type="submit">Indítás</button>
 			<?php if(isset($keyword)):?>
 				<a href="list.php">
 					<button type="button">
@@ -85,32 +83,33 @@ $book_editions = $db->getArray($selectString);
 					</button>
 				</a>
 			<?php endif; ?>
-<?php if(isset($keyword) && count($book_editions) == 0):?>
-	Nincs találat!
-<?php elseif(count($book_editions) == 0):?>
-	Jelenleg nincs egy könyv sem!
-<?php else:?>
-	<?php foreach($book_editions as $book_edition):?>
-		<div class="container text-center">
-			<div class="card" style="background-color: rgba(255,255,255,.5);">
-				<div class="card-header text-center">
-					<h4>
-						<a style="text-decoration: none; color: black;" href="selectWriter.php?szerzoid="><?php echo $book_edition["book_title"]; ?></a>
-					</h4>
+		</form>
+		<?php if(isset($keyword) && count($book_editions) == 0):?>
+			Nincs találat!
+		<?php elseif(count($book_editions) == 0):?>
+			Jelenleg nincs egy könyv sem!
+		<?php else:?>
+			<?php foreach($book_editions as $book_edition):?>
+				<div class="container text-center">
+					<div class="card" style="background-color: rgba(255,255,255,.5);">
+						<div class="card-header text-center">
+							<h4>
+								<a style="text-decoration: none; color: black;" href="selectWriter.php?szerzoid="><?php echo $book_edition["book_title"]; ?></a>
+							</h4>
+						</div>
+						<div class="card-body text-center">
+							<img src="image/<?php echo $book_edition["cover_image"];?>" style="width: 50vw; height: 50vh; border-radius: 10px;">
+						</div>
+						<div class="card-footer">
+							<h6>Műfaj: <?php echo $book_edition["genre"]; ?></h6><hr>
+							<h6>Megjelenési dátum: <?php echo $book_edition["publishing"]; ?></h6><hr>
+							<h6> Nyelv: <?php echo $book_edition["language"]; ?></h6><hr>
+							<h6><?php echo $book_edition["story"]; ?></h6><hr>
+							<a href="selectWriter.php?szerzoid=<?php echo $book_edition["writer_id"]; ?>"><?php echo $book_edition["writer_name"]; ?></a>
+						</div>
+					</div>
 				</div>
-				<div class="card-body text-center">
-					<img src="image/<?php echo $book_edition["cover_image"];?>" style="width: 50vw; height: 50vh; border-radius: 10px;">
-				</div>
-				<div class="card-footer">
-					<h6>Műfaj: <?php echo $book_edition["genre"]; ?></h6><hr>
-					<h6>Megjelenési dátum: <?php echo $book_edition["publishing"]; ?></h6><hr>
-					<h6> Nyelv: <?php echo $book_edition["language"]; ?></h6><hr>
-					<h6><?php echo $book_edition["story"]; ?></h6><hr>
-					<a href="selectWriter.php?szerzoid=<?php echo $book_edition["writer_id"]; ?>"><?php echo $book_edition["writer_name"]; ?></a>
-				</div>
-			</div>
-		</div>
-	<?php endforeach;?>
-<?php endif; ?>
-</body>
+			<?php endforeach;?>
+		<?php endif; ?>
+	</body>
 </html>
