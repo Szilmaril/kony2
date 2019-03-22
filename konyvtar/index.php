@@ -3,13 +3,14 @@
 	if (isset($_SESSION["username"])) {
 		header("location: list.php");
 	}
+	require_once "db.php";
+	$db = db::get();
  ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<?php require_once("head.php"); ?>
 		<style>
 			body
 			{
@@ -33,7 +34,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="jumbotron jumbotrontext text-center"><h2>Welcome!</h2></div>
+			<div class="jumbotron jumbotrontext text-center"><h2>Üdvözöllek!</h2></div>
 			<form class="container form-group" action="" method="POST" style="color: white;">
 				<div class="form-row">
 					<label for="username">Felhasználónév: </label>
@@ -67,8 +68,6 @@
 	</body>
 </html>
 <?php 
-	require_once "db.php";
-	$db = db::get();
 	if(true){
 		if(isset($_POST["submitForm"])){
 			$username = $db->escape($_POST["username"]);
