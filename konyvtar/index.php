@@ -1,10 +1,15 @@
 <?php 
+	error_reporting(E_ALL & ~E_NOTICE);
 	session_start();
 	if (isset($_SESSION["username"])) {
 		header("location: list.php");
 	}
 	require_once "db.php";
 	$db = db::get();
+
+	if (isset($_GET["error"])) {
+		$error = $db->escape($_GET["error"]);
+	}
  ?>
 
 <!DOCTYPE html>
@@ -31,8 +36,24 @@
 				box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
 			}
 		</style>
+		<script>
+			function errormsg(errortext)
+			{
+				Swal.fire({
+					type: 'error',
+					title: 'Oops...',
+					text: errortext + "!",
+					footer: "If you need help, contact us <a href='../index.php' style='color:black;text-decoration:none;'> <i class='fas fa-arrow-right'></i></a>."
+				})
+			}
+		</script>
 	</head>
 	<body>
+		<?php 
+			if ($error == "empty") {
+				echo "<script>errortext = 'All gap must be filled'; errormsg(errortext);</script>";
+			}
+		 ?>
 		<div class="container">
 			<div class="jumbotron jumbotrontext text-center"><h2>Üdvözöllek!</h2></div>
 			<form class="container form-group" action="" method="POST" style="color: white;">
@@ -76,7 +97,7 @@
 			$birthday = $db->escape($_POST["birthday"]);
 			$password_confirmation = $db->escape($_POST["password_confirmation"]);
 			if(empty($username) || empty($password) || empty($email) || empty($birthday)){
-				$errorMsg = "Minden mező kitöltése kötelező";
+				header("location: index.php?error=empty");
 		}else{
 			if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
 				$errorMsg = "Az emailcím nem megfelelő formátumú";
