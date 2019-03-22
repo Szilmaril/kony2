@@ -59,21 +59,21 @@
 		</nav>
 	
     <div class="container">
-        <form class="text-center" action="" method="POST" enctype="multipart/form-data">
+        <form class="container form-group text-center" action="" method="POST" enctype="multipart/form-data">
             <label>Cím: </label>
-			<input type="text" name="book_title" required="true"><br>
+			<input type="text" class="input form-control"  name="book_title" required="true"><br>
 			<label>Fedél típus: </label>
-            <input type="text" name="lid" required="true"><br>
+            <input type="text" class="input form-control"  name="lid" required="true"><br>
 			<label>Nyelv: </label>
-			<input type="text" name="language" required="true"><br>
+			<input type="text" class="input form-control"  name="language" required="true"><br>
 			<label>Mennyiség: </label>
-            <input type="number" name="quantity" required="true" autocomplete="false"><br>
+            <input type="number" class="input form-control"  name="quantity" required="true" autocomplete="false"><br>
 			<label>Megjelenési dátum: </label>
-			<input type="date" name="publishing" required="true"><br>
+			<input type="date" class="input form-control"  name="publishing" required="true"><br>
 			<label>Borítókép: </label>
-			<input type="file" name="fileToUpload" required="true"><br>
+			<input type="file"   name="fileToUpload" required="true"><br>
 			<label>Leírás: </label>
-			<textarea name="story" id="" rows="3" placeholder="leíras" required="true"></textarea><br>
+			<textarea name="story" class="input form-control"  id="" rows="3"  required="true"></textarea><br>
 			
             <button type="submit" name="submit" class="btn btn-success">Feltöltés</button>
         </form>
