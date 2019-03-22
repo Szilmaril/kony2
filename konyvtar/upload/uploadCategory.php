@@ -58,11 +58,12 @@
 			</div>
 		</nav>
 	<div class="container">	
-		<form class="text-center" action="" method="POST">
+		<form class="container form-group text-center" action="" method="POST">
+			
 			<label>Műfaj: </label>
-			<input type="text" name="genre" value="<?php echo (isset($category)) ? $category["genre"] : "" ; ?>"><br>
+			<input type="text" name="genre" class="input form-control" value="<?php echo (isset($category)) ? $category["genre"] : "" ; ?>"><br>
 	
-			<button type="submit" name="submitForm">Mentés</button>
+			<button class="btn btn-success" type="submit" name="submitForm">Mentés</button>
 		</form>
 	</div>
 <?php
@@ -79,7 +80,6 @@
 				'".$genre."'
 				);";
 			$db->query($insertString);
-			//header("Location: listahelye");
 		}
 	}
 ?>
