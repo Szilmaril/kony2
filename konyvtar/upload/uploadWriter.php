@@ -24,7 +24,12 @@
 			height: 100%;
 			width: 100%;
 		}
-
+		.input
+		{
+			-webkit-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+			-moz-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+			box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+		}
 	</style>
 </head>
 <body class="bg">
@@ -67,7 +72,7 @@
 			<label>Kép: </label>
 			<input type="file" name="fileToUpload" required="true"><br>
 			<label>Leírás: </label>
-			<textarea name="life_story" class="input form-control" id="" rows="3" placeholder="leíras" required="true"></textarea><br>
+			<textarea name="life_story" class="input form-control" id="" rows="3" required="true"></textarea><br>
 			
             <button type="submit" name="submit" class="btn btn-success">Feltöltés</button>
         </form>
