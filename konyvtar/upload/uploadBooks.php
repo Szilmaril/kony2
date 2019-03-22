@@ -30,6 +30,12 @@
 			height: 100%;
 			width: 100%;
 		}
+		.input
+		{
+			-webkit-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+			-moz-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+			box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
+		}
 
 	</style>
 </head>
@@ -114,4 +120,4 @@
 						)";
 						$db->query($insertString);
 		}
-	?>
+	?>	
