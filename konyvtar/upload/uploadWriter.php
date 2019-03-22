@@ -59,15 +59,15 @@
 		</nav>
 		
     <div class="container">
-        <form class="text-center" action="" method="POST" enctype="multipart/form-data">
+        <form class="container form-group text-center" action="" method="POST" enctype="multipart/form-data">
             <label>Név: </label>
-			<input type="text" name="writer_name" required="true"><br>
+			<input type="text" class="input form-control" name="writer_name" required="true"><br>
 			<label>Születésnap: </label>
-			<input type="date" name="writer_birthday" required="true"><br>
+			<input type="date" class="input form-control" name="writer_birthday" required="true"><br>
 			<label>Kép: </label>
 			<input type="file" name="fileToUpload" required="true"><br>
 			<label>Leírás: </label>
-			<textarea name="life_story" id="" rows="3" placeholder="leíras" required="true"></textarea><br>
+			<textarea name="life_story" class="input form-control" id="" rows="3" placeholder="leíras" required="true"></textarea><br>
 			
             <button type="submit" name="submit" class="btn btn-success">Feltöltés</button>
         </form>
