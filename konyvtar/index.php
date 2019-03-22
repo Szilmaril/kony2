@@ -16,6 +16,8 @@
 <html>
 	<head>
 		<?php require_once("head.php"); ?>
+		<link rel="stylesheet" href="css/sweetalert2.min.css">
+		<script src="js/sweetalert2.all.min.js"></script>
 		<style>
 			body
 			{
