@@ -63,32 +63,35 @@
 			</div>
 		</nav>
 <div class="container">	
-	<form class="text-center" method="POST">
-		<select name="category_id" id="">
+	<form class="container form-group text-center"  method="POST">
+		<label>Műfaj: </label>
+		<select class="input form-control" name="category_id" id="">
 			<?php if(count($allcategorys) == 0): ?>
-				<option value="">No categories</option>
+				<option value="">Nincs műfaj</option>
 			<?php endif; ?>
 			<?php foreach($allcategorys as $category): ?>
 				<option value="<?php echo $category['id']; ?>"><?php echo $category["genre"]; ?></option>
 			<?php endforeach; ?>
-		</select>
-		<select name="book_id" id="">
+		</select></br>
+		<label>Könyv: </label>
+		<select class="input form-control" name="book_id" id="">
 			<?php if(count($allbooks) == 0): ?>
-				<option value="">No categories</option>
+				<option value="">Nincs könyv</option>
 			<?php endif; ?>
 			<?php foreach($allbooks as $book): ?>
 				<option value="<?php echo $book['id']; ?>"><?php echo $book["book_title"]; ?></option>
 			<?php endforeach; ?>
-		</select>
-		<select name="writer_id" id="">
+		</select></br>
+		<label>Szerző: </label>
+		<select class="input form-control" name="writer_id" id="">
 			<?php if(count($allwriters) == 0): ?>
-				<option value="">No categories</option>
+				<option value="">Nincs szerző</option>
 			<?php endif; ?>
 			<?php foreach($allwriters as $writer): ?>
 				<option value="<?php echo $writer['id']; ?>"><?php echo $writer["writer_name"]; ?></option>
 			<?php endforeach; ?>
-		</select>
-		<button type="submit" name="submitForm">Mentés</button>
+		</select></br>
+		<button type="submit" class="btn btn-success" name="submitForm">Mentés</button>
 	<form>
 </div>
 	<?php 
@@ -111,4 +114,4 @@
 						)";
 						$db->query($insertString);
 		}
-	?>	
+	?>
