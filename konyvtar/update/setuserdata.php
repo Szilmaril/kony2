@@ -28,7 +28,7 @@ else
 				if (strlen($tmp) >= 8) {
 					$updateWithNewPasswordQuery = "UPDATE `users` SET `password` = '$newPassword', `email` = '$email', `birthday` = '$birthday' WHERE `users`.`id` = ".$userid;
 					$update = $db->query($updateWithNewPasswordQuery); echo strlen($newPassword);
-					#echo "<script>window.location.href='listMyUser.php?success=donePW'</script>";
+					echo "<script>window.location.href='listMyUser.php?success=donePW'</script>";
 				}
 				else
 				{
