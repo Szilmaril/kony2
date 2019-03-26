@@ -13,6 +13,7 @@
 	$passconfEntered = $db->escape($_POST["currentPassword"]);
 	$passconfEntered = md5($passconfEntered);
 	$newPassword = $db->escape($_POST["newPassword"]);
+	$tmp = $db->escape($_POST["newPassword"]);
 	$newPassword = md5($newPassword);
 	$newPassword2 = $db->escape($_POST["newPassword2"]);
 	$newPassword2 = md5($newPassword2);
@@ -21,13 +22,18 @@ if (empty($email) || empty($birthday) || empty($passconfEntered)) {
 }
 else
 {
-if(strlen(trim($newPassword)) < 8){
 	if ($passwordconf == $passconfEntered) {
 		if (!(empty($newPassword2)) || !(empty($newPassword2))) {
 			if ($newPassword2 == $newPassword) {
-				$updateWithNewPasswordQuery = "UPDATE `users` SET `password` = '$newPassword', `email` = '$email', `birthday` = '$birthday' WHERE `users`.`id` = ".$userid;
-				$update = $db->query($updateWithNewPasswordQuery);
-				echo "<script>window.location.href='listMyUser.php?success=donePW'</script>";
+				if (strlen($tmp) >= 8) {
+					$updateWithNewPasswordQuery = "UPDATE `users` SET `password` = '$newPassword', `email` = '$email', `birthday` = '$birthday' WHERE `users`.`id` = ".$userid;
+					$update = $db->query($updateWithNewPasswordQuery); echo strlen($newPassword);
+					#echo "<script>window.location.href='listMyUser.php?success=donePW'</script>";
+				}
+				else
+				{
+					echo "<script>window.location.href='listMyUser.php?error=shortPW'</script>";
+				}
 			}
 			else
 			{
@@ -49,10 +55,6 @@ if(strlen(trim($newPassword)) < 8){
 			echo "<script>window.location.href='listMyUser.php?error=wrongPW'</script>";
 		}
 	}
-	else
-	{
-		echo "<script>window.location.href='listMyUser.php?error=shortPW'</script>";
-	}
-}
+
 	
  ?>
