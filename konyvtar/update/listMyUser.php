@@ -3,18 +3,14 @@ error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 require_once ("../db.php");
 $db = db::get();
-
 $selectUserDataQuery = "SELECT * FROM users WHERE username = '".$_SESSION["username"]."'";
 $userData = $db->getArray($selectUserDataQuery);
-
 if (isset($_GET["success"])) {
 	$success = $db->escape($_GET["success"]);
 }
-
 if (isset($_GET["error"])) {
 	$error = $db->escape($_GET["error"]);
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,65 +25,56 @@ if (isset($_GET["error"])) {
 				background-size: cover;
 				background-repeat: none;
 			}
-
 			.bg img
 			{
 				height: 100%;
 				width: 100%;
 			}
-
 		</style>
 		<script>
 			function errormsg(errortext)
 			{
 				Swal.fire({
 					type: 'error',
-					title: 'Oops...',
+					title: 'Hiba',
 					text: errortext + "!",
-					footer: "If you need help, contact us <a href='../index.php' style='color:black;text-decoration:none;'> <i class='fas fa-arrow-right'></i></a>."
 				})
 			}
-
 			function okmsg(oktext)
 			{
 				Swal.fire(
-					'Ok!',
+					'Siker',
 					oktext + '!',
 					'success'
 					)
 			}
-
 		</script>
 	</head>
 	<body class="bg">
 		<?php 
   switch ($error) {
-
    case 'noMatch':
-   echo "<script>errortext = 'Your passwords doesnt match'; errormsg(errortext);</script>";
+   echo "<script>errortext = 'A jelszavak nem egyeznek!'; errormsg(errortext);</script>";
    break;
-
    case 'invalidPW':
    echo "<script>errortext = 'Your new passwords doesnt match. They didnt change.'; errormsg(errortext);</script>";
    break;
-
    case 'empty':
    echo "<script>errortext = 'All data must be given.'; errormsg(errortext);</script>";
    break;
-
    case 'wrongPW':
-   echo "<script>errortext = 'Wrong password entered. No changes made'; errormsg(errortext);</script>";
+   echo "<script>errortext = 'Nincs jelszó módosítás!'; errormsg(errortext);</script>";
    break;
-
+   case 'shortPW':
+   echo "<script>errortext = 'A jelszó nincs minimum 8 karakter!'; errormsg(errortext);</script>";
+   break;
    default:
      # code...
    break;
  }
-
  if ($success == "donePW") {
-   echo "<script>oktext = 'It is done. Next time you must use your new password for login'; okmsg(oktext);</script>";
+   echo "<script>oktext = 'Sikeres jelszó csere!'; okmsg(oktext);</script>";
  }
-
  if ($success == "done") {
    echo "<script>oktext = 'Succesful modifications'; okmsg(oktext);</script>";
  }
@@ -112,18 +99,18 @@ if (isset($_GET["error"])) {
 			</div>
 		</nav>
 		<div class="container">
-			<div class="jumbotron"><h3><?php echo $_SESSION["username"]." "; ?>profiljanak szerkesztese</h3></div>
+			<div class="jumbotron" style="background-color: rgba(255,255,255,.5);"><h3><?php echo $_SESSION["username"]." "; ?>profiljának szerkesztése</h3></div>
 			<?php foreach($userData as $user): ?>
 			<form action="setuserdata.php" method="post" class="form-group">
 				<div class="form-row">
 					<label for="emailAddress">Email</label>
 					<input type="email" id="emailAddress" name="emailAddress" class="form-control" value="<?php if(!empty($user['email'])){echo $user['email'];} ?>" placeholder="Email cim" required="true">
 
-					<label for="newPassword">Uj Jelszo (Opcionalis)</label>
-					<input type="password" id="newPassword" name="newPassword" class="form-control" value="" placeholder="Uj Jelszo (Opcionalis)">
+					<label for="newPassword">Uj Jelszo</label>
+					<input type="password" id="newPassword" name="newPassword" class="form-control" value="" placeholder="Új jelszó" required="true">
 
-					<label for="newPassword2">Uj Jelszo megerositese (Opcionalis)</label>
-					<input type="password" id="newPassword2" name="newPassword2" class="form-control" value="" placeholder="Uj Jelszo megerositese (Opcionalis)">
+					<label for="newPassword2">Uj Jelszo megerositese</label>
+					<input type="password" id="newPassword2" name="newPassword2" class="form-control" value="" placeholder="Új jelszó ellenörzés" required="true">
 
 					<label for="birthday">Szuletesnap</label>
 					<input type="date" id="birthday" name="birthday" class="form-control" value="<?php if(!empty($user['birthday'])){echo $user['birthday'];} ?>" required="true">
