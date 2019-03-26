@@ -1,3 +1,4 @@
+
 <?php 
 	error_reporting(E_ALL & ~E_NOTICE);
 	session_start();
@@ -6,12 +7,13 @@
 	}
 	require_once "db.php";
 	$db = db::get();
-
-	if (isset($_GET["error"])) {
-		$error = $db->escape($_GET["error"]);
+	if (isset($_GET["success"])) {
+	$success = $db->escape($_GET["success"]);
 	}
- ?>
-
+	if (isset($_GET["error"])) {
+	$error = $db->escape($_GET["error"]);
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,12 +27,10 @@
 				background-repeat: no-repeat;
 				background-size: cover;
 			}
-
 			.jumbotrontext
 			{
 				background-color: rgba(255,255,255,.3);
 			}
-
 			.input
 			{
 				-webkit-box-shadow: inset 13px 6px 26px -2px rgba(0,0,0,0.75);
@@ -43,19 +43,32 @@
 			{
 				Swal.fire({
 					type: 'error',
-					title: 'Oops...',
+					title: 'Hiba',
 					text: errortext + "!",
-					footer: "If you need help, contact us <a href='../index.php' style='color:black;text-decoration:none;'> <i class='fas fa-arrow-right'></i></a>."
 				})
 			}
 		</script>
 	</head>
 	<body>
-		<?php 
-			if ($error == "empty") {
-				echo "<script>errortext = 'All gap must be filled'; errormsg(errortext);</script>";
-			}
-		 ?>
+<?php 
+  switch ($error) {
+   case 'noMatch':
+   echo "<script>errortext = 'A jelszavak nem egyeznek!'; errormsg(errortext);</script>";
+   break;
+   case 'wrongE':
+   echo "<script>errortext = 'Az e-mail cím hibás formátumu!'; errormsg(errortext);</script>";
+   break;
+   case 'empty':
+   echo "<script>errortext = 'Töltsön ki minden mezőt!'; errormsg(errortext);</script>";
+   break;
+   case 'shortPW':
+   echo "<script>errortext = 'A jelszó nincs minimum 8 karakter!'; errormsg(errortext);</script>";
+   break;
+   default:
+     # code...
+   break;
+ }
+ ?>
 		<div class="container">
 			<div class="jumbotron jumbotrontext text-center"><h2>Üdvözöllek!</h2></div>
 			<form class="container form-group" action="" method="POST" style="color: white;">
@@ -99,14 +112,14 @@
 			$birthday = $db->escape($_POST["birthday"]);
 			$password_confirmation = $db->escape($_POST["password_confirmation"]);
 			if(empty($username) || empty($password) || empty($email) || empty($birthday)){
-				header("location: index.php?error=empty");
+				echo "<script>window.location.href='index.php?error=empty'</script>";
 		}else{
 			if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-				$errorMsg = "Az emailcím nem megfelelő formátumú";
+				echo "<script>window.location.href='index.php?error=wrongE'</script>";
 			}else if(strlen(trim($password)) < 8){
-				$errorMsg = "A jelszónak legalább 8 karakternek kell lennie";
+				echo "<script>window.location.href='index.php?error=shortPW'</script>";
 			}else if($password != $password_confirmation){
-					$errorMsg = "A jelszó és a jelszó megerősítésnek egyeznie kell!";
+					echo "<script>window.location.href='index.php?error=noMatch'</script>";
 				}else{
 					$insertString = "INSERT INTO users(
 				`username`,
