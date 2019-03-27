@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	error_reporting(E_ALL & ~E_NOTICE);
 	require_once "../db.php";
 	
 	if ($_SESSION["username"] != "admin") {
@@ -74,6 +75,7 @@
 				</thead>
 				<tbody>
 			<?php foreach($allusers as $users):?>
+				<?php if($user["username"] == "admin"): ?>
 				<tr>
 					<td><?php echo $users["id"]; ?></td>
 					<td><?php echo $users["username"]; ?></td>
@@ -82,6 +84,7 @@
 					<td><a href="updateUser.php?usersid=<?php echo $users["id"];?>">Szerkesztés</a></td>
 					<td><a href="deleteUser.php?usersid=<?php echo $users["id"];?> ">Törlés</a></td>
 				</tr>
+			<?php endif; ?>
 			<?php endforeach;?>
 		<?php endif;?>
 		
