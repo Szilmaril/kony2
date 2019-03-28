@@ -121,7 +121,11 @@
 			}else if($password != $password_confirmation){
 					echo "<script>window.location.href='index.php?error=noMatch'</script>";
 				}else{
-					$insertString = "INSERT INTO users(
+					$checkIfUserExistQuery = "SELECT * FROM users WHERE username ='".$username."'";
+					$check = $db->getArray($checkIfUserExistQuery);
+
+					if (empty($check)) {
+						$insertString = "INSERT INTO users(
 				`username`,
 				`password`,
 				`email`,
@@ -135,6 +139,12 @@
 				$db->query($insertString);
 				$_SESSION["username"] = $username;
 				header("location: list.php");
+					}
+					else
+					{
+						echo "<script>window.location.href='index.php?error=userWxists'</script>";
+					}
+					
 				}
 			}
 		}
